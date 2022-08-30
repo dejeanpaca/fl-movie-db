@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:moviedb/api/api_requests.dart';
 import 'package:moviedb/app.dart';
 import 'package:moviedb/pages/home.dart';
 
@@ -14,6 +15,8 @@ Future<void> load(BuildContext context) async {
 
   await Db.createStorage();
   await App.movieDb.initialize();
+
+  await ApiRequests.initialize();
 
   await Future.delayed(const Duration(milliseconds: 250));
 
