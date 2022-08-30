@@ -11,7 +11,7 @@ class ThemeList extends ChangeNotifier {
 
   static AppTheme dark = AppTheme(
       theme: ThemeData(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         fontFamily: 'sf',
         scaffoldBackgroundColor: const Color(0xFF0e1324),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
