@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: getPage(),
+      body: SafeArea(child: getPage()),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,
         onTap: onNavTapped,
