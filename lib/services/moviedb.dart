@@ -29,4 +29,9 @@ class MovieDb extends Db {
     // table for genres
     await db.execute('CREATE TABLE genres (id INTEGER PRIMARY KEY, genre_id INTEGER, name TEXT)');
   }
+
+  /// execute an sql query
+  Future<void> execute(String sql, [List<Object?>? arguments]) async {
+    await db.execute(sql, arguments);
+  }
 }
