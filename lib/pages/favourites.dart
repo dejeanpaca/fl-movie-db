@@ -8,7 +8,7 @@ class FavouritesPage extends StatelessWidget {
     return Center(
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Text('Favourites')],
+      children: const [Text('Favourites')],
     ));
   }
 }

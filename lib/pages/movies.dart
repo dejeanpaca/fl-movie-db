@@ -8,7 +8,7 @@ class MoviesPage extends StatelessWidget {
     return Center(
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Text('Movies')],
+      children: const [Text('Movies')],
     ));
   }
 }
