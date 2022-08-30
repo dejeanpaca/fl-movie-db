@@ -1,4 +1,9 @@
+import 'genres.dart';
+
 class Movie {
+  /// id of the movie, according to IMDB
+  int id = 0;
+
   /// title
   String title = '';
 
@@ -6,7 +11,7 @@ class Movie {
   double rating = 0.0;
 
   /// list of genres
-  List<String> genres = [];
+  List<Genre> genres = [];
 
   /// have we marked this movie as favorite
   bool favorite = false;

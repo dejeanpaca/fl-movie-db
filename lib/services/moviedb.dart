@@ -25,5 +25,8 @@ class MovieDb extends Db {
 
     // table for movie genres
     await db.execute('CREATE TABLE movie_genres (id INTEGER PRIMARY KEY, movie INTEGER, genre INTEGER)');
+
+    // table for genres
+    await db.execute('CREATE TABLE genres (id INTEGER PRIMARY KEY, genre_id INTEGER, name TEXT)');
   }
 }
