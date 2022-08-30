@@ -2,8 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:moviedb/ui/theme/app_theme.dart';
 
 class ThemeList extends ChangeNotifier {
-  static AppTheme light = AppTheme(theme: ThemeData.light(), name: 'light');
-  static AppTheme dark = AppTheme(theme: ThemeData.dark(), name: 'dark');
+  static AppTheme light = AppTheme(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        fontFamily: 'sf',
+      ),
+      name: 'light');
 
-  AppTheme current = light;
+  static AppTheme dark = AppTheme(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        fontFamily: 'sf',
+        scaffoldBackgroundColor: const Color(0xFF0e1324),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Color(0xFF010510),
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Color(0xFFec9b3e),
+          selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          unselectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+        ),
+      ),
+      name: 'dark');
+
+  AppTheme current = dark;
 }

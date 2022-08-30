@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:moviedb/home.dart';
+import 'package:moviedb/pages/home.dart';
 import 'package:moviedb/ui/theme/theme_list.dart';
 import 'package:moviedb/utils/single_fire.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +37,7 @@ class SplashPageState extends State<SplashPage> {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     var navigator = Navigator.of(context);
-    await Future.delayed(const Duration(milliseconds: 5000));
+    await Future.delayed(const Duration(milliseconds: 250));
 
     if (navigator.mounted) navigator.pushReplacement(MaterialPageRoute(builder: (context) => const HomePage()));
   }
