@@ -15,4 +15,10 @@ class Genres {
   static Genre? getById(int id) {
     return list[id];
   }
+
+  static void addAll(List<Genre> genres) {
+    for (var g in genres) {
+      add(g);
+    }
+  }
 }
