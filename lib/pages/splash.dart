@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:moviedb/home.dart';
+import 'package:moviedb/ui/theme/theme_list.dart';
 import 'package:moviedb/utils/single_fire.dart';
+import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -16,6 +19,9 @@ class SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     loadFire.fire(load);
 
+    var theme = Provider.of<ThemeList>(context).current;
+    print(theme.name);
+
     return Scaffold(
       backgroundColor: const Color(0xFF0e1324),
       body: Center(
@@ -27,6 +33,9 @@ class SplashPageState extends State<SplashPage> {
 
   /// load our startup state
   Future<void> load() async {
+    // portrait-only mode
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
     var navigator = Navigator.of(context);
     await Future.delayed(const Duration(milliseconds: 5000));
 

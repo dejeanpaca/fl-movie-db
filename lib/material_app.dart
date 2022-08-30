@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moviedb/pages/splash.dart';
+import 'package:moviedb/ui/theme/theme_list.dart';
+import 'package:provider/provider.dart';
 
 class MovieApp extends StatelessWidget {
   const MovieApp({Key? key}) : super(key: key);
@@ -10,9 +12,7 @@ class MovieApp extends StatelessWidget {
     return MaterialApp(
       title: 'MovieDB',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: Provider.of<ThemeList>(context).current.theme,
       home: const SplashPage(),
     );
   }
