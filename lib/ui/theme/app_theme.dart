@@ -5,5 +5,7 @@ class AppTheme {
   Color backgroundColor = const Color(0xFF0e1324);
   String name;
 
-  AppTheme({required this.theme, this.name = 'unknown'});
+  TextStyle headerTextStyle;
+
+  AppTheme({required this.theme, this.name = 'unknown', required this.headerTextStyle});
 }
