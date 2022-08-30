@@ -12,7 +12,7 @@ class DioRequests {
   void initialize({required String location, DioInterceptors? interceptors}) {
     apiLocation = location;
 
-    dio == Dio();
+    dio = Dio();
     dio.options.baseUrl = location;
     dio.interceptors.add(interceptors ?? DioInterceptors());
   }
