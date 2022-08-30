@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:moviedb/api/api_requests.dart';
 import 'package:moviedb/app.dart';
 import 'package:moviedb/pages/home.dart';
+import 'package:moviedb/services/movie_service.dart';
 
 import 'db.dart';
 
 /// load our startup state
 Future<void> load(BuildContext context) async {
+  var start = DateTime.now();
+
   var navigator = Navigator.of(context);
 
   // portrait-only mode
@@ -18,7 +21,14 @@ Future<void> load(BuildContext context) async {
 
   await ApiRequests.initialize();
 
-  await Future.delayed(const Duration(milliseconds: 250));
+  await MovieService.fetchGenres();
 
+  // show the splash screen a bit, but account for startup time
+  var elapsed = DateTime.now().difference(start).inMilliseconds;
+  var waitTime = 1000 - elapsed;
+
+  if (waitTime > 0) await Future.delayed(Duration(milliseconds: waitTime));
+
+  // open the home page
   if (navigator.mounted) navigator.pushReplacement(MaterialPageRoute(builder: (context) => const HomePage()));
 }
