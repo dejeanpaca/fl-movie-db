@@ -8,11 +8,12 @@ class MoviesResponse {
 
     var m = Movie();
 
-    m.backdrop = JsonUtils.getString(json['backdrop_path'], m.backdrop);
     m.id = JsonUtils.getInt(json['id'], m.id);
     m.description = JsonUtils.getString(json['overview'], m.description);
     m.rating = JsonUtils.getDouble(json['vote_average'], m.rating);
     m.title = JsonUtils.getString(json['title'], m.title);
+    m.backdrop = JsonUtils.getString(json['backdrop_path'], m.backdrop);
+    m.poster = JsonUtils.getString(json['poster_path'], m.poster);
 
     var genreIds = json['genre_ids'];
 

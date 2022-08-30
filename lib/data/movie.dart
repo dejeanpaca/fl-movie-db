@@ -21,4 +21,7 @@ class Movie {
 
   /// backdrop image
   String backdrop = '';
+
+  /// poster image
+  String poster = '';
 }
