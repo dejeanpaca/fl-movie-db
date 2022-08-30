@@ -1,6 +1,6 @@
-import 'package:moviedb/services/db.dart';
+import 'package:moviedb/services/moviedb.dart';
 
 class App {
   static const String title = 'MovieDB';
-  static Db movieDb = Db('movies.db');
+  static MovieDb movieDb = MovieDb();
 }

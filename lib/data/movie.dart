@@ -1,6 +1,6 @@
 class Movie {
-  /// name
-  String name = '';
+  /// title
+  String title = '';
 
   /// rating out of 10
   double rating = 0.0;
@@ -10,4 +10,10 @@ class Movie {
 
   /// have we marked this movie as favorite
   bool favorite = false;
+
+  /// description
+  String description = '';
+
+  /// backdrop image
+  String backdrop = '';
 }

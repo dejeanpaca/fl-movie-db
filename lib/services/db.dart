@@ -6,11 +6,18 @@ import 'package:sqflite/sqflite.dart';
 class Db {
   late Database db;
   String dbName;
+  int version = 0;
 
   Db(this.dbName);
 
+  /// opens the db.
+  /// should override with db specific logic
+  Future<Database> open() async {
+    return openDatabase(dbName, version: version);
+  }
+
   Future<void> initialize() async {
-    db = await openDatabase(dbName);
+    db = await open();
     print('Database $dbName open ${db.isOpen}');
   }
 
