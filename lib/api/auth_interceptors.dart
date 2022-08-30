@@ -8,5 +8,6 @@ class AuthInterceptors extends DioInterceptors {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.headers['Authorization'] = 'Bearer ${ApiConfig.authorization}';
+    super.onRequest(options, handler);
   }
 }
