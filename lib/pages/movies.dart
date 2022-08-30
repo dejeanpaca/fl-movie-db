@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:moviedb/data/movie.dart';
 import 'package:moviedb/pages/widgets/header_text.dart';
 import 'package:moviedb/services/movie_service.dart';
 import 'package:moviedb/utils/single_fire.dart';
 import 'widgets/header.dart';
+import 'widgets/movie.dart';
 
 class MoviesPage extends StatefulWidget {
   const MoviesPage({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
   bool isLoading = true;
   int currentPage = 1;
   final SingleFireFunction initial = SingleFireFunction();
+  List<Movie> movies = [];
 
   @override
   void initState() {
@@ -40,6 +43,7 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const Header(),
                   const HeaderText(caption: 'Popular'),
+                  SizedBox(height: 24.0),
                   Expanded(child: ListView(shrinkWrap: true, children: getMovies())),
                 ])),
               ],
@@ -47,7 +51,7 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
   }
 
   Future<void> loadPage() async {
-    await MovieService.fetchMovies(page: currentPage);
+    movies = await MovieService.fetchMovies(page: currentPage);
 
     if (mounted) {
       setState(() {
@@ -57,7 +61,14 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
   }
 
   List<Widget> getMovies() {
-    return [];
+    List<Widget> list = [];
+
+    for (var m in movies) {
+      list.add(MovieWidget(movie: m));
+      list.add(SizedBox(height: 24.0));
+    }
+
+    return list;
   }
 
   @override
