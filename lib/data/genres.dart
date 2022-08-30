@@ -21,4 +21,8 @@ class Genres {
       add(g);
     }
   }
+
+  static void clear() {
+    list.clear();
+  }
 }
