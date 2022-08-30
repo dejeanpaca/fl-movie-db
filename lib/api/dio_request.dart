@@ -1,9 +1,9 @@
-import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 import 'package:moviedb/api/dio_interceptors.dart';
 
 class DioRequests {
   /// dio instance for these kind of requests
-  late dio.Dio dioInstance;
+  late Dio dio;
 
   /// api location
   String apiLocation = '';
@@ -12,8 +12,8 @@ class DioRequests {
   void initialize({required String location, DioInterceptors? interceptors}) {
     apiLocation = location;
 
-    dioInstance == dio.Dio();
-    dioInstance.options.baseUrl = location;
-    dioInstance.interceptors.add(interceptors ?? DioInterceptors());
+    dio == Dio();
+    dio.options.baseUrl = location;
+    dio.interceptors.add(interceptors ?? DioInterceptors());
   }
 }
