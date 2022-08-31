@@ -4,7 +4,9 @@ import 'package:moviedb/api/api_requests.dart';
 import 'package:moviedb/app.dart';
 import 'package:moviedb/db_storage/movie.dart';
 import 'package:moviedb/pages/home.dart';
+import 'package:moviedb/services/connectivity.dart';
 import 'package:moviedb/services/movie_service.dart';
+import 'package:provider/provider.dart';
 
 import 'db.dart';
 
@@ -21,6 +23,9 @@ Future<void> load(BuildContext context) async {
   await App.movieDb.initialize();
 
   await ApiRequests.initialize();
+
+  // check app connectivity now and run in background
+  if (navigator.mounted) await Provider.of<AppConnectivity>(context, listen: false).initialize();
 
   await MovieService.fetchGenres();
 
