@@ -11,6 +11,7 @@ class ThemeList extends ChangeNotifier {
     ),
     name: 'light',
     textColor: Colors.black,
+    genreTagColor: const Color(0xFF3a2e29),
   );
 
   static AppTheme dark = AppTheme(
@@ -28,6 +29,7 @@ class ThemeList extends ChangeNotifier {
     ),
     name: 'dark',
     textColor: const Color(0xFFE4ECEF),
+    genreTagColor: const Color(0xFF3a2e29),
   );
 
   AppTheme current = dark;

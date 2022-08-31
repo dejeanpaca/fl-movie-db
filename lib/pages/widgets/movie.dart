@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moviedb/api/config.dart';
 import 'package:moviedb/data/movie.dart';
+import 'package:moviedb/pages/widgets/genre.dart';
 
 import 'package:moviedb/ui/theme/theme_list.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,7 @@ class MovieWidget extends StatelessWidget {
     var image = CachedNetworkImageProvider(ApiConfig.getPosterUrl(movie.poster));
     var theme = Provider.of<ThemeList>(context).current;
 
-    return Row(children: [
+    return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
       SizedBox(
         height: 100,
         width: 100,
@@ -33,7 +34,21 @@ class MovieWidget extends StatelessWidget {
           Text('${movie.rating.toStringAsFixed(1)} / 10 IMDb', style: theme.movieRatingStyle),
         ]),
         const SizedBox(height: 8.0),
+        if (movie.genres.isNotEmpty) Wrap(runSpacing: 7.5, children: getGenres()),
       ])),
     ]);
+  }
+
+  List<Widget> getGenres() {
+    List<Widget> list = [];
+
+    for (var g in movie.genres) {
+      list.add(Padding(
+        padding: const EdgeInsets.only(right: 5.0),
+        child: GenreTag(genre: g),
+      ));
+    }
+
+    return list;
   }
 }
