@@ -12,7 +12,7 @@ class MovieDb extends Db {
   @override
   Future<Database> open() async {
     return await openDatabase(
-      dbName,
+      await constructPath(),
       version: version,
       onCreate: onCreate,
     );
