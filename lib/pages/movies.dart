@@ -57,9 +57,6 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
                 Expanded(
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const Header(),
-                  if (kDebugMode)
-                    Text(appConnectivity.connectivity.toString(),
-                        style: const TextStyle(fontFamily: 'sf', fontSize: 10)),
                   const HeaderText(caption: 'Popular'),
                   const SizedBox(height: 24.0),
                   if (hasMovies()) Expanded(child: getListView()),
@@ -77,8 +74,6 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
   }
 
   Future<void> loadPage() async {
-    print('GET: $currentPage');
-
     var current = await MovieService.fetchMovies(page: currentPage);
 
     movies.addAll(current);

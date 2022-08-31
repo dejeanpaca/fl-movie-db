@@ -28,7 +28,7 @@ class Header extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                   color: theme.errorColor,
                 ),
-                child: Text('No connection', style: theme.defaultTextStyle)),
+                child: Text('Offline', style: theme.defaultTextStyle)),
         ]));
   }
 }
