@@ -38,6 +38,7 @@ class FavouriteMovieDbStorage {
         id: item['movie_id'] as int,
         title: item['title'] as String,
         rating: item['rating'] as double,
+        favourite: true,
         description: item['description'] as String,
         backdrop: item['backdrop'] as String,
         poster: item['poster'] as String,
