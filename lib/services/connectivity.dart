@@ -32,7 +32,7 @@ class AppConnectivity extends ChangeNotifier {
 class AppConnectivityChecker extends PeriodicRunner {
   AppConnectivityChecker() {
     runAlways = true;
-    runEvery = const Duration(milliseconds: 5000);
+    runEvery = const Duration(milliseconds: 2500);
   }
 
   @override
