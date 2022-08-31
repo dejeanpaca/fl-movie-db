@@ -19,7 +19,6 @@ class SplashPageState extends State<SplashPage> {
     loadFire.fire(() => load(context));
 
     var theme = Provider.of<ThemeList>(context).current;
-    print(theme.name);
 
     return Scaffold(
       backgroundColor: const Color(0xFF0e1324),

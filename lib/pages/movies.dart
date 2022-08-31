@@ -20,11 +20,6 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
   List<Movie> movies = [];
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
     initial.fire(() => loadPage());
