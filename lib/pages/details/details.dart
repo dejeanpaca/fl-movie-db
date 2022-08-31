@@ -44,7 +44,20 @@ class MovieDetails extends StatelessWidget {
                             border: Border.all(color: theme.theme.scaffoldBackgroundColor, width: 0),
                             color: theme.theme.scaffoldBackgroundColor,
                             borderRadius: const BorderRadius.vertical(top: Radius.circular(15.0))),
-                      ))
+                      )),
+                  Positioned(
+                      top: 0.0,
+                      left: 5.0,
+                      child: SafeArea(
+                          child: IconButton(
+                        // design uses arrow_right_alt, but it's rotated 180 so we'll match since there is no
+                        // arrow_left_alt
+                        icon: const RotatedBox(
+                            quarterTurns: 2, child: Icon(Icons.arrow_right_alt, color: Colors.white, size: 30.0)),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ))),
                 ],
               )),
           Expanded(
