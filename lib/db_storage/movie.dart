@@ -13,7 +13,7 @@ class FavouriteMovieDbStorage {
       await App.movieDb.db.insert('favourites', row);
 
       // remove any previous genres, if left over
-      await App.movieDb.execute('DELETE FROM movie_genres WHERE movie = ${m.value.id}');
+      await App.movieDb.db.delete('movie_genres', where: 'movie = ?', whereArgs: [m.value.id]);
 
       // insert genres associated with the movie
       for (var g in m.value.genres) {
@@ -60,6 +60,6 @@ class FavouriteMovieDbStorage {
 
   /// remove a movie from db
   static Future<void> remove(int movieId) async {
-    await App.movieDb.execute('DELETE FROM favourites WHERE movie_id = $movieId');
+    await App.movieDb.db.delete('favourites', where: 'movie_id = ?', whereArgs: [movieId]);
   }
 }
