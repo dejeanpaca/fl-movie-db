@@ -22,7 +22,7 @@ class DioRequests {
     Response? response;
 
     try {
-      dio.get(path).then((value) => response = value);
+      await dio.get(path).then((value) => response = value);
     } catch (e, s) {
       printException(e, s);
       response = (e as DioError).response;
