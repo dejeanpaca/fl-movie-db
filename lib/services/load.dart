@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:moviedb/api/api_requests.dart';
 import 'package:moviedb/app.dart';
+import 'package:moviedb/db_storage/movie.dart';
 import 'package:moviedb/pages/home.dart';
 import 'package:moviedb/services/movie_service.dart';
 
@@ -22,6 +23,9 @@ Future<void> load(BuildContext context) async {
   await ApiRequests.initialize();
 
   await MovieService.fetchGenres();
+
+  // load our favorite movies
+  await FavouriteMovieDbStorage.load();
 
   // show the splash screen a bit, but account for startup time
   var elapsed = DateTime.now().difference(start).inMilliseconds;

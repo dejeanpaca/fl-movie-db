@@ -24,4 +24,23 @@ class Movie {
 
   /// poster image
   String poster = '';
+
+  Movie({
+    this.id = 0,
+    this.title = '',
+    this.rating = 0,
+    this.favourite = false,
+    this.description = '',
+    this.backdrop = '',
+    this.poster = '',
+  });
+
+  Map<String, dynamic> toMap() => {
+        'movie_id': id,
+        'title': title,
+        'rating': rating,
+        'backdrop': backdrop,
+        'poster': poster,
+        'description': description,
+      };
 }
