@@ -20,6 +20,9 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
   List<Movie> movies = [];
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     initial.fire(() => loadPage());
@@ -59,13 +62,16 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
     List<Widget> list = [];
 
     for (var m in movies) {
-      list.add(MovieWidget(movie: m));
-      list.add(const SizedBox(height: 24.0));
+      list.add(Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          child: MovieWidget(
+            movie: m,
+            stateCallback: () {
+              setState(() {});
+            },
+          )));
     }
 
     return list;
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

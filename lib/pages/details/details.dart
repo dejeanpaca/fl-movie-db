@@ -6,12 +6,26 @@ import 'package:moviedb/pages/widgets/favourite_button.dart';
 import 'package:moviedb/pages/widgets/genre.dart';
 import 'package:moviedb/pages/widgets/rating.dart';
 import 'package:moviedb/ui/theme/theme_list.dart';
+import 'package:moviedb/services/favourite.dart';
 import 'package:provider/provider.dart';
 
-class MovieDetails extends StatelessWidget {
+class MovieDetails extends StatefulWidget {
   final Movie movie;
 
   const MovieDetails({Key? key, required this.movie}) : super(key: key);
+
+  @override
+  State<MovieDetails> createState() => MovieDetailsState();
+}
+
+class MovieDetailsState extends State<MovieDetails> {
+  late final Movie movie;
+
+  @override
+  void initState() {
+    super.initState();
+    movie = widget.movie;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +92,7 @@ class MovieDetails extends StatelessWidget {
                     RatingWidget(rating: movie.rating),
                   ],
                 )),
-                FavouriteButton(saved: movie.favourite, onPressed: () {}),
+                FavouriteButton(saved: movie.favourite, onPressed: favouriteToggle),
               ]),
               const SizedBox(height: 12.0),
               if (movie.genres.isNotEmpty) Wrap(runSpacing: 7.5, children: getGenres()),
@@ -108,5 +122,10 @@ class MovieDetails extends StatelessWidget {
     }
 
     return list;
+  }
+
+  Future<void> favouriteToggle() async {
+    await FavouriteService.toggle(movie);
+    if (mounted) setState(() {});
   }
 }

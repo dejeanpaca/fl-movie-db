@@ -13,7 +13,9 @@ import 'favourite_button.dart';
 class MovieWidget extends StatefulWidget {
   final Movie movie;
 
-  const MovieWidget({Key? key, required this.movie}) : super(key: key);
+  final Function()? stateCallback;
+
+  const MovieWidget({Key? key, required this.movie, this.stateCallback}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MovieWidgetState();
@@ -48,14 +50,16 @@ class MovieWidgetState extends State<MovieWidget> {
           onPressed: () async {
             await FavouriteService.toggle(widget.movie);
             if (mounted) setState(() {});
+            if (widget.stateCallback != null) widget.stateCallback!();
           }),
     ]);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       child: content,
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetails(movie: widget.movie)));
+      onTap: () async {
+        await Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetails(movie: widget.movie)));
+        if (widget.stateCallback != null) widget.stateCallback!();
       },
     );
   }

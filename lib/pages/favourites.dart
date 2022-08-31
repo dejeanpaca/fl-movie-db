@@ -39,7 +39,12 @@ class FavouritesPageState extends State<FavouritesPage> with AutomaticKeepAliveC
     for (var m in Favourites.list.entries) {
       list.add(Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
-        child: MovieWidget(movie: m.value),
+        child: MovieWidget(
+          movie: m.value,
+          stateCallback: () {
+            setState(() {});
+          },
+        ),
       ));
     }
 
