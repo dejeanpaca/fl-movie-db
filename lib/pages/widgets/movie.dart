@@ -60,8 +60,24 @@ class MovieWidgetState extends State<MovieWidget> {
       behavior: HitTestBehavior.opaque,
       child: content,
       onTap: () async {
-        await Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetails(movie: widget.movie)));
+        await Navigator.push(context, createDetailsRoute());
         if (widget.stateCallback != null) widget.stateCallback!();
+      },
+    );
+  }
+
+  Route createDetailsRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => MovieDetails(movie: widget.movie),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+
+        var tween = Tween(begin: begin, end: Offset.zero).chain(CurveTween(curve: Curves.easeOut));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
       },
     );
   }
