@@ -26,7 +26,6 @@ class MovieService {
   /// fetch movies from the api
   static Future<List<Movie>> fetchMovies({int page = 1}) async {
     var language = App.language;
-    var page = 1;
 
     var response =
         await ApiRequests.movie.get('https://api.themoviedb.org/3/movie/popular?language=$language&page=$page');
