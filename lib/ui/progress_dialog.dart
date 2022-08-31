@@ -52,7 +52,7 @@ class ProgressDialogState extends State<ProgressDialog> {
       widget.future.then((value) {
         Navigator.pop(context);
       }).catchError((err, stackTrace) {
-        debugPrint('Error during progress ${err.toString()} dialog');
+        debugPrint('Error during progress $err dialog');
         debugPrintStack(stackTrace: stackTrace);
         Navigator.pop(context);
       });
