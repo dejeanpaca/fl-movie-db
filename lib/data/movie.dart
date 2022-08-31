@@ -14,7 +14,7 @@ class Movie {
   List<Genre> genres = [];
 
   /// have we marked this movie as favorite
-  bool favorite = false;
+  bool favourite = false;
 
   /// description
   String description = '';
