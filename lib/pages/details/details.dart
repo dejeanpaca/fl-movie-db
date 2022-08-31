@@ -5,6 +5,7 @@ import 'package:moviedb/data/movie.dart';
 import 'package:moviedb/pages/widgets/favourite_button.dart';
 import 'package:moviedb/pages/widgets/genre.dart';
 import 'package:moviedb/pages/widgets/rating.dart';
+import 'package:moviedb/ui/progress_dialog.dart';
 import 'package:moviedb/ui/theme/theme_list.dart';
 import 'package:moviedb/services/favourite.dart';
 import 'package:provider/provider.dart';
@@ -125,7 +126,7 @@ class MovieDetailsState extends State<MovieDetails> {
   }
 
   Future<void> favouriteToggle() async {
-    await FavouriteService.toggle(movie);
+    await showProgressDialog(context, FavouriteService.toggle(movie));
     if (mounted) setState(() {});
   }
 }

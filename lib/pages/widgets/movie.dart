@@ -6,6 +6,7 @@ import 'package:moviedb/pages/details/details.dart';
 import 'package:moviedb/pages/widgets/genre.dart';
 import 'package:moviedb/pages/widgets/rating.dart';
 import 'package:moviedb/services/favourite.dart';
+import 'package:moviedb/ui/progress_dialog.dart';
 import 'package:moviedb/ui/theme/theme_list.dart';
 import 'package:provider/provider.dart';
 import 'favourite_button.dart';
@@ -48,7 +49,8 @@ class MovieWidgetState extends State<MovieWidget> {
       FavouriteButton(
           saved: widget.movie.favourite,
           onPressed: () async {
-            await FavouriteService.toggle(widget.movie);
+            await showProgressDialog(context, FavouriteService.toggle(widget.movie));
+
             if (mounted) setState(() {});
             if (widget.stateCallback != null) widget.stateCallback!();
           }),
