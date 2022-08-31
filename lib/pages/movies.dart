@@ -74,4 +74,8 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
 
     return list;
   }
+
+  void refresh() {
+    setState(() {});
+  }
 }

@@ -50,4 +50,8 @@ class FavouritesPageState extends State<FavouritesPage> with AutomaticKeepAliveC
 
     return list;
   }
+
+  void refresh() {
+    setState(() {});
+  }
 }

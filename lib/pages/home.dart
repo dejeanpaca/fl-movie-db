@@ -12,9 +12,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  static const int MOVIES_INDEX = 0;
+  static const int FAVOURITES_INDEX = 1;
+
   late final AnimationController animationController;
   late final Animation animationOffset;
   late final TabController tabController;
+
+  final moviesKey = GlobalKey<MoviesPageState>();
+  final favouritesKey = GlobalKey<FavouritesPageState>();
 
   // current page, must be one of the indexes above
   int currentPage = 0;
@@ -27,8 +33,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.initState();
 
     screens = [
-      const MoviesPage(),
-      const FavouritesPage(),
+      MoviesPage(key: moviesKey),
+      FavouritesPage(key: favouritesKey),
     ];
 
     animationController = AnimationController(vsync: this, duration: const Duration(seconds: 1));
@@ -81,6 +87,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       onPageChanged: (newPage) {
         setState(() {
           currentPage = newPage;
+          if (currentPage == MOVIES_INDEX) {
+            if (moviesKey.currentState != null) moviesKey.currentState!.refresh();
+          }
+
+          if (currentPage == FAVOURITES_INDEX) {
+            if (favouritesKey.currentState != null) favouritesKey.currentState!.refresh();
+          }
         });
       },
     );
