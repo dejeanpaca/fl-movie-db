@@ -6,14 +6,14 @@ class MoviesResponse {
   static Movie itemFromJson(Map<String, dynamic>? json) {
     if (json == null) return Movie();
 
-    var m = Movie();
-
-    m.id = JsonUtils.getInt(json['id'], m.id);
-    m.description = JsonUtils.getString(json['overview'], m.description);
-    m.rating = JsonUtils.getDouble(json['vote_average'], m.rating);
-    m.title = JsonUtils.getString(json['title'], m.title);
-    m.backdrop = JsonUtils.getString(json['backdrop_path'], m.backdrop);
-    m.poster = JsonUtils.getString(json['poster_path'], m.poster);
+    var m = Movie(
+      id: JsonUtils.getInt(json['id'], 0),
+      description: JsonUtils.getString(json['overview'], ''),
+      rating: JsonUtils.getDouble(json['vote_average'], 0),
+      title: JsonUtils.getString(json['title'], ''),
+      backdrop: JsonUtils.getString(json['backdrop_path'], ''),
+      poster: JsonUtils.getString(json['poster_path'], ''),
+    );
 
     var genreIds = json['genre_ids'];
 
