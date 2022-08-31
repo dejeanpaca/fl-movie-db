@@ -2,11 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moviedb/api/config.dart';
 import 'package:moviedb/data/movie.dart';
+import 'package:moviedb/pages/details/details.dart';
 import 'package:moviedb/pages/widgets/genre.dart';
-import 'package:moviedb/pages/widgets/favourite_button.dart';
+import 'package:moviedb/pages/widgets/rating.dart';
 import 'package:moviedb/services/favourite.dart';
 import 'package:moviedb/ui/theme/theme_list.dart';
 import 'package:provider/provider.dart';
+import 'favourite_button.dart';
 
 class MovieWidget extends StatefulWidget {
   final Movie movie;
@@ -23,7 +25,7 @@ class MovieWidgetState extends State<MovieWidget> {
     var image = CachedNetworkImageProvider(ApiConfig.getPosterUrl(widget.movie.poster));
     var theme = Provider.of<ThemeList>(context).current;
 
-    return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    var content = Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
       SizedBox(
         height: 100,
         width: 100,
@@ -37,11 +39,7 @@ class MovieWidgetState extends State<MovieWidget> {
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(widget.movie.title, style: theme.movieTitleStyle),
         const SizedBox(height: 8.0),
-        Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          const Icon(Icons.star, color: Color(0xFFf2cf16)),
-          const SizedBox(width: 8.0),
-          Text('${widget.movie.rating.toStringAsFixed(1)} / 10 IMDb', style: theme.movieRatingStyle),
-        ]),
+        RatingWidget(rating: widget.movie.rating),
         const SizedBox(height: 8.0),
         if (widget.movie.genres.isNotEmpty) Wrap(runSpacing: 7.5, children: getGenres()),
       ])),
@@ -52,6 +50,14 @@ class MovieWidgetState extends State<MovieWidget> {
             if (mounted) setState(() {});
           }),
     ]);
+
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      child: content,
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetails(movie: widget.movie)));
+      },
+    );
   }
 
   List<Widget> getGenres() {

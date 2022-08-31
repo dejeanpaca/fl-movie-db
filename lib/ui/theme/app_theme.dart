@@ -13,6 +13,8 @@ class AppTheme {
   late final TextStyle genreStyle;
   final Color genreTagColor;
 
+  late final TextStyle detailsTitleStyle;
+
   final Color navbarColor = const Color(0xFF010510);
   late final TextStyle navbarLabelStyle;
   late final TextStyle selectedNavbarLabelStyle;
@@ -28,6 +30,7 @@ class AppTheme {
     movieTitleStyle = TextStyle(fontFamily: 'sf', fontWeight: FontWeight.w600, fontSize: 15, color: textColor);
     movieRatingStyle = TextStyle(fontFamily: 'sf', fontWeight: FontWeight.w400, fontSize: 12, color: textColor);
     genreStyle = TextStyle(fontFamily: 'sf', fontWeight: FontWeight.w400, fontSize: 11, color: textColor);
+    detailsTitleStyle = TextStyle(fontFamily: 'sf', fontSize: 20, fontWeight: FontWeight.w600, color: textColor);
     navbarLabelStyle = TextStyle(fontFamily: 'sf', fontSize: 12, fontWeight: FontWeight.w600, color: textColor);
     selectedNavbarLabelStyle =
         TextStyle(fontFamily: 'sf', fontSize: 12, fontWeight: FontWeight.w600, color: selectedColor);
