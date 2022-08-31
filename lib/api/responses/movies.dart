@@ -17,9 +17,9 @@ class MoviesResponse {
 
     var genreIds = json['genre_ids'];
 
-    if (genreIds is List<int>) {
+    if (genreIds is List) {
       for (var genreId in genreIds) {
-        var genre = Genres.getById(genreId);
+        var genre = Genres.getById(JsonUtils.getInt(genreId, 0));
 
         if (genre != null) m.genres.add(genre);
       }
