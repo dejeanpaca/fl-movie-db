@@ -48,9 +48,7 @@ class MovieWidgetState extends State<MovieWidget> {
       FavouriteButton(
           saved: widget.movie.favourite,
           onPressed: () async {
-            print('WTF');
             await FavouriteService.toggle(widget.movie);
-            print('WTF2');
             if (mounted) setState(() {});
           }),
     ]);
