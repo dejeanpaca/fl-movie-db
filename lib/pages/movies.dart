@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:moviedb/data/movie.dart';
 import 'package:moviedb/pages/widgets/header_text.dart';
