@@ -43,7 +43,7 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const Header(),
                   const HeaderText(caption: 'Popular'),
-                  SizedBox(height: 24.0),
+                  const SizedBox(height: 24.0),
                   Expanded(child: ListView(shrinkWrap: true, children: getMovies())),
                 ])),
               ],
@@ -65,7 +65,7 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
 
     for (var m in movies) {
       list.add(MovieWidget(movie: m));
-      list.add(SizedBox(height: 24.0));
+      list.add(const SizedBox(height: 24.0));
     }
 
     return list;

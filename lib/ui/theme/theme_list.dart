@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:moviedb/ui/theme/app_theme.dart';
 
 class ThemeList extends ChangeNotifier {
+  static const Color darkTextColor = Color(0xFFE4ECEF);
+
   static AppTheme light = AppTheme(
     theme: ThemeData(
       brightness: Brightness.light,
       fontFamily: 'sf',
     ),
     name: 'light',
-    headerTextStyle: const TextStyle(fontFamily: 'sf', fontWeight: FontWeight.w600, fontSize: 22),
+    textColor: Colors.black,
   );
 
   static AppTheme dark = AppTheme(
@@ -25,7 +27,7 @@ class ThemeList extends ChangeNotifier {
       ),
     ),
     name: 'dark',
-    headerTextStyle: const TextStyle(fontFamily: 'sf', fontWeight: FontWeight.w600, fontSize: 22),
+    textColor: const Color(0xFFE4ECEF),
   );
 
   AppTheme current = dark;
