@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:moviedb/data/favourites.dart';
 import 'package:moviedb/pages/widgets/header.dart';
 import 'package:moviedb/pages/widgets/header_text.dart';
+import 'package:moviedb/pages/widgets/movie.dart';
 
 class FavouritesPage extends StatelessWidget {
   const FavouritesPage({Key? key}) : super(key: key);
@@ -22,6 +24,15 @@ class FavouritesPage extends StatelessWidget {
   }
 
   List<Widget> getFavourites() {
-    return const [];
+    List<Widget> list = [];
+
+    for (var m in Favourites.list.entries) {
+      list.add(Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: MovieWidget(movie: m.value),
+      ));
+    }
+
+    return list;
   }
 }
