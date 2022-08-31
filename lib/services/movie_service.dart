@@ -8,9 +8,9 @@ import 'package:moviedb/db_storage/genres.dart';
 
 class MovieService {
   static Future<void> fetchGenres() async {
-    var response = await ApiRequests.movie.dio.get('genre/movie/list');
+    var response = await ApiRequests.movie.get('genre/movie/list');
 
-    if (response.statusCode == 200) {
+    if (response != null && response.statusCode == 200) {
       var genres = GenresResponse.fromJson(response.data);
 
       // add genres and store to db
@@ -29,9 +29,9 @@ class MovieService {
     var page = 1;
 
     var response =
-        await ApiRequests.movie.dio.get('https://api.themoviedb.org/3/movie/popular?language=$language&page=$page');
+        await ApiRequests.movie.get('https://api.themoviedb.org/3/movie/popular?language=$language&page=$page');
 
-    if (response.statusCode == 200) {
+    if (response != null && response.statusCode == 200) {
       return MoviesResponse.fromJson(response.data);
     }
 
