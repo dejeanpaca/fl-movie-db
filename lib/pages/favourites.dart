@@ -4,11 +4,21 @@ import 'package:moviedb/pages/widgets/header.dart';
 import 'package:moviedb/pages/widgets/header_text.dart';
 import 'package:moviedb/pages/widgets/movie.dart';
 
-class FavouritesPage extends StatelessWidget {
+class FavouritesPage extends StatefulWidget {
   const FavouritesPage({Key? key}) : super(key: key);
 
   @override
+  State<StatefulWidget> createState() => FavouritesPageState();
+}
+
+class FavouritesPageState extends State<FavouritesPage> with AutomaticKeepAliveClientMixin<FavouritesPage> {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(
