@@ -30,7 +30,7 @@ class MovieDetailsState extends State<MovieDetails> {
 
   @override
   Widget build(BuildContext context) {
-    var image = CachedNetworkImageProvider(ApiConfig.getBackdropUrl(movie.backdrop));
+    var imageUrl = ApiConfig.getBackdropUrl(movie.backdrop);
     var theme = Provider.of<ThemeList>(context).current;
 
     return Scaffold(
@@ -41,15 +41,19 @@ class MovieDetailsState extends State<MovieDetails> {
               height: 320.0,
               child: Stack(
                 children: [
-                  Container(
-                      width: double.infinity,
-                      height: 320.0,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                        fit: BoxFit.cover,
-                        alignment: Alignment.topCenter,
-                        image: image,
-                      ))),
+                  CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      placeholder: (context, url) => const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => const CircularProgressIndicator(),
+                      imageBuilder: (context, imageProvider) => Container(
+                          width: double.infinity,
+                          height: 320.0,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            fit: BoxFit.cover,
+                            alignment: Alignment.topCenter,
+                            image: imageProvider,
+                          )))),
                   Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(

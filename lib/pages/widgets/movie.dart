@@ -25,18 +25,27 @@ class MovieWidget extends StatefulWidget {
 class MovieWidgetState extends State<MovieWidget> {
   @override
   Widget build(BuildContext context) {
-    var image = CachedNetworkImageProvider(ApiConfig.getPosterUrl(widget.movie.poster));
+    var imageUrl = ApiConfig.getPosterUrl(widget.movie.poster);
     var theme = Provider.of<ThemeList>(context).current;
 
+    const width = 100.0;
+    const height = 100.0;
+
     var content = Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      SizedBox(
-        height: 100,
-        width: 100,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(5.0),
-          child: Image(image: image, fit: BoxFit.cover),
-        ),
-      ),
+      CachedNetworkImage(
+          imageUrl: imageUrl,
+          placeholder: (context, url) =>
+              const SizedBox(width: width, height: height, child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) =>
+              const SizedBox(width: width, height: height, child: CircularProgressIndicator()),
+          imageBuilder: (context, imageProvider) => SizedBox(
+                width: width,
+                height: height,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),
+                  child: Image(image: imageProvider, fit: BoxFit.cover),
+                ),
+              )),
       const SizedBox(width: 12.0),
       Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
