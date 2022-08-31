@@ -23,8 +23,16 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
   final SingleFireFunction initial = SingleFireFunction();
   List<Movie> movies = [];
 
+  final scrollController = ScrollController();
+
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(pagination);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +42,13 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
     var theme = Provider.of<ThemeList>(context).current;
     var appConnectivity = Provider.of<AppConnectivity>(context);
 
-    return isLoading
+    return isLoading && movies.isEmpty
         ? Center(
             child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [CircularProgressIndicator()],
+            children: [
+              progressIndicator(),
+            ],
           ))
         : Padding(
             padding: const EdgeInsets.all(20.0),
@@ -52,7 +62,7 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
                         style: const TextStyle(fontFamily: 'sf', fontSize: 10)),
                   const HeaderText(caption: 'Popular'),
                   const SizedBox(height: 24.0),
-                  if (hasMovies()) Expanded(child: ListView(shrinkWrap: true, children: getMovies())),
+                  if (hasMovies()) Expanded(child: getListView()),
                   if (!appConnectivity.ok() && !hasMovies())
                     Expanded(
                         child: Center(
@@ -67,7 +77,11 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
   }
 
   Future<void> loadPage() async {
-    movies = await MovieService.fetchMovies(page: currentPage);
+    print('GET: $currentPage');
+
+    var current = await MovieService.fetchMovies(page: currentPage);
+
+    movies.addAll(current);
 
     if (mounted) {
       setState(() {
@@ -76,21 +90,39 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
     }
   }
 
-  List<Widget> getMovies() {
-    List<Widget> list = [];
+  Widget getMovie(Movie m) {
+    return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        child: MovieWidget(
+          movie: m,
+          stateCallback: () {
+            setState(() {});
+          },
+        ));
+  }
 
-    for (var m in movies) {
-      list.add(Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12.0),
-          child: MovieWidget(
-            movie: m,
-            stateCallback: () {
-              setState(() {});
-            },
-          )));
-    }
+  Widget getListView() {
+    return ListView.builder(
+        shrinkWrap: true,
+        controller: scrollController,
+        itemCount: !isLoading ? movies.length : movies.length + 1,
+        itemBuilder: (BuildContext context, int index) {
+          if (index == movies.length) return progressIndicator();
 
-    return list;
+          return getMovie(movies[index]);
+        });
+  }
+
+  Widget progressIndicator() {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
+      Padding(
+          padding: EdgeInsets.all(10.0),
+          child: SizedBox(
+            width: 30.0,
+            height: 30.0,
+            child: CircularProgressIndicator(),
+          )),
+    ]);
   }
 
   void refresh() {
@@ -99,5 +131,16 @@ class MoviesPageState extends State<MoviesPage> with AutomaticKeepAliveClientMix
 
   bool hasMovies() {
     return movies.isNotEmpty;
+  }
+
+  void pagination() {
+    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+      setState(() {
+        isLoading = true;
+        ++currentPage;
+      });
+
+      loadPage();
+    }
   }
 }
