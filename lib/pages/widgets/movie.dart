@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moviedb/api/config.dart';
 import 'package:moviedb/data/movie.dart';
 import 'package:moviedb/pages/details/details.dart';
+import 'package:moviedb/pages/widgets/cni_placeholder.dart';
 import 'package:moviedb/pages/widgets/genre.dart';
 import 'package:moviedb/pages/widgets/rating.dart';
 import 'package:moviedb/services/favourite.dart';
@@ -34,10 +35,8 @@ class MovieWidgetState extends State<MovieWidget> {
     var content = Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
       CachedNetworkImage(
           imageUrl: imageUrl,
-          placeholder: (context, url) =>
-              const SizedBox(width: width, height: height, child: CircularProgressIndicator()),
-          errorWidget: (context, url, error) =>
-              const SizedBox(width: width, height: height, child: CircularProgressIndicator()),
+          placeholder: (context, url) => const CNIPlaceholder(width: width, height: height),
+          errorWidget: (context, url, error) => const CNIError(width: width, height: height),
           imageBuilder: (context, imageProvider) => SizedBox(
                 width: width,
                 height: height,

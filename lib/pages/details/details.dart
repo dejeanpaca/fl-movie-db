@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moviedb/api/config.dart';
 import 'package:moviedb/data/movie.dart';
+import 'package:moviedb/pages/widgets/cni_placeholder.dart';
 import 'package:moviedb/pages/widgets/favourite_button.dart';
 import 'package:moviedb/pages/widgets/genre.dart';
 import 'package:moviedb/pages/widgets/rating.dart';
@@ -33,21 +34,25 @@ class MovieDetailsState extends State<MovieDetails> {
     var imageUrl = ApiConfig.getBackdropUrl(movie.backdrop);
     var theme = Provider.of<ThemeList>(context).current;
 
+    const double backdropHeight = 320.0;
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(
-              height: 320.0,
+              height: backdropHeight,
               child: Stack(
                 children: [
                   CachedNetworkImage(
                       imageUrl: imageUrl,
-                      placeholder: (context, url) => const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => const CircularProgressIndicator(),
+                      placeholder: (context, url) =>
+                          const CNIPlaceholder(width: double.infinity, height: backdropHeight, color: Colors.blue),
+                      errorWidget: (context, url, error) =>
+                          const CNIError(width: double.infinity, height: backdropHeight, color: Colors.blue),
                       imageBuilder: (context, imageProvider) => Container(
                           width: double.infinity,
-                          height: 320.0,
+                          height: backdropHeight,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                             fit: BoxFit.cover,
