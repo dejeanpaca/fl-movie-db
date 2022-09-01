@@ -87,6 +87,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       onPageChanged: (newPage) {
         setState(() {
           currentPage = newPage;
+          tabController.index = newPage;
+
           if (currentPage == MOVIES_INDEX) {
             if (moviesKey.currentState != null) moviesKey.currentState!.refresh();
           }
