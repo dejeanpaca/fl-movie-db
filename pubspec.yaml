@@ -6,8 +6,8 @@ publish_to: 'none'
 version: 0.9.0+1
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
-  flutter: ^3.3.0
+  sdk: ">=2.19.0 <3.0.0"
+  flutter: ^3.7.0
 
 dependencies:
   flutter:
@@ -15,18 +15,18 @@ dependencies:
 
   path: ^1.8.2
   cupertino_icons: ^1.0.5
-  provider: ^6.0.3
-  sqflite: ^2.0.3+1
-  dio: ^4.0.6
-  cached_network_image: ^3.2.2
-  connectivity_plus: ^2.3.6+1
+  provider: ^6.0.5
+  sqflite: ^2.2.6
+  dio: ^5.0.3
+  cached_network_image: ^3.2.3
+  connectivity_plus: ^3.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.1
-  flutter_launcher_icons: ^0.10.0
+  flutter_launcher_icons: ^0.12.0
 
 flutter_icons:
   android: "launcher_icon"

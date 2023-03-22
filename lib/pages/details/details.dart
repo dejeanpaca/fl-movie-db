@@ -44,7 +44,7 @@ class MovieDetailsState extends State<MovieDetails> {
               height: backdropHeight,
               child: Stack(
                 children: [
-                  CachedNetworkImage(
+                    CachedNetworkImage(
                       imageUrl: imageUrl,
                       placeholder: (context, url) =>
                           const CNIPlaceholder(width: double.infinity, height: backdropHeight, color: Colors.blue),
